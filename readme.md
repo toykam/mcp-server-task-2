@@ -191,9 +191,9 @@ This server uses free, no-API-key-required services:
 ```
 utility-tools-mcp-server/
 ├── src/
+│   └── tools              # the list of tools in the mcp server
+│   └── utils             # Utilities used in the mcp server
 │   └── index.ts          # Main server implementation
-├── tests/
-│   └── tools.test.ts     # Unit tests
 ├── dist/                 # Compiled JavaScript (generated)
 ├── package.json
 ├── tsconfig.json
@@ -215,7 +215,6 @@ utility-tools-mcp-server/
 This project uses:
 - TypeScript for type safety
 - ESLint for linting
-- Jest for testing
 - Strict mode enabled
 
 ## License
