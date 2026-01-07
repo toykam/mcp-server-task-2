@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",           // Use modern JavaScript features
+    "module": "Node16",            // Use Node.js module system
+    "lib": ["ES2022"],            // Available JavaScript libraries
+    "moduleResolution": "Node16",  // How to resolve imports
+    "rootDir": "./src",           // Where source files are
+    "outDir": "./dist",           // Where compiled files go
+    "strict": true,               // Enable strict type checking
+    "esModuleInterop": true,      // Better module compatibility
+    "skipLibCheck": true          // Skip checking library types (faster)
+  },
+  "include": ["src/**/*"],        // Files to compile
+  "exclude": ["node_modules", "dist"]
+}
