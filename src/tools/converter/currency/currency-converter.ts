@@ -1,10 +1,10 @@
-import { config } from "dotenv";
-import { ServiceResponse } from "../../../utils/types";
-import cache from "../../../utils/cache";
-import Cache from "../../../utils/cache";
-import RateLimiter from "../../../utils/rate-limiter";
 
-config();
+import Cache from "../../../utils/cache.js";
+import RateLimiter from "../../../utils/rate-limiter.js";
+import dotenv from "dotenv";
+import type { ServiceResponse } from "../../../utils/types.js";
+
+dotenv.config();
 
 class CurrencyConverter {
     private cache = new Cache<any>();

@@ -1,6 +1,6 @@
-import { Unit } from "convert-units";
+import convert from "convert-units";
 
-export const unitMappings: Record<string, Unit> = {
+export const unitMappings: Record<string, convert.Unit> = {
   // Length
   meter: "m",
   meters: "m",

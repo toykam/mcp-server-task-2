@@ -1,6 +1,7 @@
-import { ServiceResponse } from "../../../utils/types";
-import convert, { Unit } from "convert-units";
-import { normalizeUnit } from "./unit-mappings";
+
+import convert from "convert-units";
+import { normalizeUnit } from "./unit-mappings.js";
+import type { ServiceResponse } from "../../../utils/types.js";
 
 class UnitConverter {
     async convertUnit(value: number, fromUnit: string, toUnit: string): Promise<ServiceResponse<number>> {
@@ -10,7 +11,7 @@ class UnitConverter {
         const from = normalizeUnit(fromUnit);
         const to = normalizeUnit(toUnit);
 
-        const converted = convert(value).from(from as Unit).to(to as Unit);
+        const converted = convert(value).from(from as convert.Unit).to(to as convert.Unit);
         return { success: true, data: converted };
     }
 }

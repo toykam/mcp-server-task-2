@@ -1,14 +1,13 @@
-import Cache from "../../utils/cache";
-import cache from "../../utils/cache";
-import logger from "../../utils/logger";
-import RateLimiter from "../../utils/rate-limiter";
-import rateLimiter from "../../utils/rate-limiter";
+import Cache from "../../utils/cache.js";
+import logger from "../../utils/logger.js";
+import RateLimiter from "../../utils/rate-limiter.js";
+import type { ServiceResponse } from "../../utils/types.js";
 
 class WeatherChecker {
   private cache = new Cache<any>();
   private rateLimiter = new RateLimiter(10, 60000); // 10 requests per minute
 
-  async getWeather(location: string): Promise<string> {
+  async getWeather(location: string): Promise<ServiceResponse<string>> {
     if (!this.rateLimiter.checkLimit("weather")) {
       throw new Error("Rate limit exceeded. Please try again later.");
     }
@@ -30,13 +29,15 @@ class WeatherChecker {
       );
 
       if (!geoResponse.ok) {
-        throw new Error("Failed to geocode location");
+        // throw new Error("Failed to geocode location");
+        return { success: false, error: "Failed to geocode location" };
       }
 
       const geoData: any = await geoResponse.json();
 
       if (!geoData.results || geoData.results.length === 0) {
-        throw new Error(`Location not found: ${location}`);
+        // throw new Error(`Location not found: ${location}`);
+        return { success: false, error: `Location not found: ${location}` };
       }
 
       const { latitude, longitude, name, country } = geoData.results[0];
@@ -47,7 +48,8 @@ class WeatherChecker {
       );
 
       if (!weatherResponse.ok) {
-        throw new Error("Failed to fetch weather data");
+        // throw new Error("Failed to fetch weather data");
+        return { success: false, error: "Failed to fetch weather data" };
       }
 
       const weatherData: any = await weatherResponse.json();
@@ -80,7 +82,7 @@ class WeatherChecker {
         99: "Thunderstorm with heavy hail",
       };
 
-      const result = `Weather for ${name}, ${country}:
+      const result = `Weather in ${name}, ${country}:
 - Temperature: ${current.temperature_2m}°C
 - Feels like: ${current.apparent_temperature}°C
 - Humidity: ${current.relative_humidity_2m}%
@@ -90,10 +92,10 @@ class WeatherChecker {
 
       this.cache.set(cacheKey, result, 600000); // Cache for 10 minutes
       logger.info("Weather data fetched successfully", { location });
-      return result;
+      return { success: true, data: result };
     } catch (error: any) {
       logger.error("Weather fetch error", error);
-      throw new Error(`Failed to get weather: ${error.message}`);
+      return { success: false, error: error.message }
     }
   }
 }

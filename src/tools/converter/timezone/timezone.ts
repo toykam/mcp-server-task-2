@@ -1,4 +1,5 @@
-import { ServiceResponse } from "../../../utils/types";
+import type { ServiceResponse } from "../../../utils/types.js";
+
 
 class TimeZone {
     // get current time of a timezone

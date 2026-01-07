@@ -3,21 +3,21 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
-    "start": "node dist/index.js"
+    "start": "nodemon dist/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.17.1",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.25.1",
     "@types/convert-units": "^2.3.12",
     "convert-units": "^2.3.4",
     "dotenv": "^17.2.3",
-    "global": "^4.4.0",
+    "fastmcp": "^3.26.8",
     "nodemon": "^3.1.11",
     "zod": "^4.3.5"
   },
