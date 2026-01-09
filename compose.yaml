@@ -11,8 +11,12 @@ services:
   server:
     build:
       context: .
+    env_file:
+      .env
     environment:
       NODE_ENV: production
+      EXCHANGE_RATE_API_KEY: ${EXCHANGE_RATE_API_KEY}
+      
     ports:
       - 8080:8080
 
