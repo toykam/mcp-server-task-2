@@ -14,7 +14,7 @@ ARG PNPM_VERSION=10.17.1
 FROM node:${NODE_VERSION}-slim as base
 
 # Set working directory for all build stages.
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # Install pnpm.
 RUN --mount=type=cache,target=/root/.npm \
@@ -65,8 +65,8 @@ COPY package.json .
 
 # Copy the production dependencies from the deps stage and also
 # the built application from the build stage into the image.
-COPY --from=deps /usr/src/app/node_modules ./node_modules
-COPY --from=build /usr/src/app/dist ./dist
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=build /app/dist ./dist
 
 
 # Expose the port that the application listens on.
