@@ -45,33 +45,13 @@ reviewAnalyzerToolHandler(server);
 codeGeneratorToolHandler(server);
 
 
-// const main = async () => {
-//     const transport = new StdioServerTransport();
-//     await server.connect(transport);
-
-//     server.sendToolListChanged();
-
-//     console.log("MCP Server is running...");
-// }
-
-// app.use('/mcp);
-
-// app.listen(3000, () => {
-//     console.log("Express MCP Server is running on http://localhost:3000");
-// });
-
-
 server.start({
     transportType: "httpStream",
     httpStream: {
-        port: 8080,
+        port: 8010,
         endpoint: "/mcp"
     }
 }).then(() => {
     console.log("FastMCP Server is running...");
 });
 
-// main().catch((err) => {
-//     console.error("Error starting MCP Server:", err);
-//     process.exit(1);
-// });
