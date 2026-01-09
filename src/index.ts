@@ -5,6 +5,8 @@ import { currencyConverterToolHandler } from "./tools/converter/currency/handler
 import { unitConverterToolHandler } from "./tools/converter/unit/handler.js";
 import { timeZoneConverterToolHandler } from "./tools/converter/timezone/handler.js";
 import logger from "./utils/logger.js";
+import { reviewAnalyzerToolHandler } from "./tools/analyzer/review/handler.js";
+import codeGeneratorToolHandler from "./tools/code-generator/handler.js";
 
 
 // const server = new McpServer({
@@ -37,6 +39,10 @@ currencyConverterToolHandler(server);
 unitConverterToolHandler(server);
 // // timezone converter tool handler
 timeZoneConverterToolHandler(server);
+
+reviewAnalyzerToolHandler(server);
+
+codeGeneratorToolHandler(server);
 
 
 // const main = async () => {
